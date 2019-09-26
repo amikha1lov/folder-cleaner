@@ -21,12 +21,15 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gio
 
-print(dir(shutil))
+#print(dir(Gtk.Align))
 
 class Handler:
 
     def __init__(self):
         self.path = ""
+        self.days_old = 5
+        self.string_to_delete = ""
+        self.extension_to_delete = ""
 
     def on_main_window_destroy(self, *args):
         Gtk.main_quit()
@@ -88,10 +91,52 @@ class Handler:
         else:
             pass
             
+    def on_delete_screenshots_button_clicked(self, button):
+        folder = GLib.get_home_dir() + '/Pictures'
+        folders, files = self.get_files_and_folders(folder)
+        
+        for f in files:
+            if "creenshot" in f:
+                os.remove(f)
+            
     def on_model_button_settings_clicked(self, button):
-        print("on_model_button_settings_clicked")
+        builder = Gtk.Builder()
+        builder.add_from_file("main.ui")
+        window = builder.get_object("main_window")
+        settings_dialog = Gtk.Dialog(parent=window)
+        settings_dialog.set_default_size(150, 100)
+        settings_dialog.add_buttons(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+             Gtk.STOCK_OK, Gtk.ResponseType.OK)
+        
+        main_box = Gtk.Box(spacing=6)
+        main_box.set_orientation(Gtk.Orientation.VERTICAL)
+        main_box.set_homogeneous(True)
+        
+        grid2 = Gtk.Grid()
+        grid2.set_column_homogeneous(True)
+        grid2.set_row_homogeneous(True)
+        delete_files_label = Gtk.Label(label="Delete files older than (days old): ")
+        delete_files_label.set_halign(Gtk.Align.END)
+        grid2.attach(delete_files_label, 0, 1, 1, 1)
+        delete_files_entry = Gtk.Entry()
+        delete_files_entry.set_text(str(self.days_old))
+        delete_files_entry.set_margin_start(6)
+        delete_files_entry.set_halign(Gtk.Align.START)
+        grid2.attach(delete_files_entry, 1, 1, 1, 1)
+        main_box.add(grid2)
 
-
+        box = settings_dialog.get_content_area()
+        box.add(main_box)
+        settings_dialog.show_all()
+        
+        response = settings_dialog.run()
+        
+        if response == Gtk.ResponseType.OK:
+            print("The OK button was clicked")
+        elif response == Gtk.ResponseType.CANCEL:
+            print("The Cancel button was clicked")
+            
+        settings_dialog.destroy()
 
 builder = Gtk.Builder()
 builder.add_from_file("main.ui")
