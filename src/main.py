@@ -16,23 +16,32 @@
 	
 import subprocess
 import os
+import time
 import shutil
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gio
 
-#print(dir(Gtk.Align))
+#print(dir(Gtk.InputPurpose.DIGITS))
 
 class Handler:
 
     def __init__(self):
         self.path = ""
         self.days_old = 5
-        self.string_to_delete = ""
-        self.extension_to_delete = ""
 
     def on_main_window_destroy(self, *args):
         Gtk.main_quit()
+        
+    def on_clear_button_clicked(self, button):
+        if self.path is not "":
+            now = time.time()
+            folder = self.path
+            folders, files = self.get_files_and_folders(folder)
+            
+            for f in files:
+                if os.stat(f).st_mtime < now - self.days_old * 86400:
+                    os.remove(os.path.join(folder, f))
 
     def on_model_button_add_clicked(self, button):
         print("on_model_button_add_clicked!")
@@ -132,9 +141,13 @@ class Handler:
         response = settings_dialog.run()
         
         if response == Gtk.ResponseType.OK:
-            print("The OK button was clicked")
+            try:
+                int(delete_files_entry.get_text())
+                self.days_old = delete_files_entry.get_text()
+            except ValueError:
+                self.days_old = 5
         elif response == Gtk.ResponseType.CANCEL:
-            print("The Cancel button was clicked")
+            self.days_old = 5
             
         settings_dialog.destroy()
 
