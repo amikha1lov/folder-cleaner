@@ -24,11 +24,21 @@ class FolderCleaner(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on__add_button_clicked(self, button):
-        if self._main_list_box_row.is_visible:
-            self._main_list_box_row.set_visible(False)
-        self.folder = FolderBox(self)
-        self.folder._folder_box_label.set_label("Yarr")
-        self._main_list_box.insert(self.folder, -1)
+        chooser = Gtk.FileChooserDialog(title="Open Folder",
+                                        action=Gtk.FileChooserAction.SELECT_FOLDER,
+                                        buttons=("Cancel", Gtk.ResponseType.CANCEL,
+                                                 "OK", Gtk.ResponseType.OK))
+        response = chooser.run()
+        if response == Gtk.ResponseType.OK:
+            label = chooser.get_filename()
+            if self._main_list_box_row.is_visible:
+                self._main_list_box_row.set_visible(False)
+            folder = FolderBox(label)
+            folder._folder_box_label.set_label(label)
+            self._main_list_box.insert(folder, -1)
+            chooser.destroy() 
+        else:
+            chooser.destroy()
 
     @Gtk.Template.Callback()
     def on__preferences_button_clicked(self, button):

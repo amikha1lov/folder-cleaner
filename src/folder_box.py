@@ -3,17 +3,16 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio
 
 @Gtk.Template.from_file('/home/late/Programs/folder-cleaner/src/folder-box.ui')
-class FolderBox(Gtk.EventBox):
+class FolderBox(Gtk.ListBox):
 
-    __gtype_name__ = "_folder_box"
+    __gtype_name__ = "_list_box"
 
     _folder_box_label = Gtk.Template.Child()
 
-    def __init__(self, app, *args, **kwargs):
+    def __init__(self, label, *args, **kwargs):
         super().__init__(**kwargs)
 
-        #self._folder_box_label.set_label("Folder Label")
-
+        self.label = label
 
     @Gtk.Template.Callback()
     def on__sort_button_clicked(self, button):
