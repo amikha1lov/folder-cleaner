@@ -10,7 +10,6 @@ class FolderCleaner(Gtk.ApplicationWindow):
 
     __gtype_name__ = "_main_window"
 
-
     _about_window = Gtk.Template.Child()
     _add_label = Gtk.Template.Child()
     _main_list_box_row = Gtk.Template.Child()
@@ -20,23 +19,24 @@ class FolderCleaner(Gtk.ApplicationWindow):
         super().__init__(*args, title="Folder Cleaner", application=app)
 
         self.set_wmclass("Folder Cleaner", "Folder Cleaner")
+        self.settings = Gio.Settings.new('com.github.Latesil.folder-cleaner')
+        self.settings.connect("changed::count", self.on_count_change, None)
 
 
     @Gtk.Template.Callback()
     def on__add_button_clicked(self, button):
         chooser = Gtk.FileChooserDialog(title="Open Folder",
+                                        transient_for=self,
                                         action=Gtk.FileChooserAction.SELECT_FOLDER,
                                         buttons=("Cancel", Gtk.ResponseType.CANCEL,
                                                  "OK", Gtk.ResponseType.OK))
         response = chooser.run()
         if response == Gtk.ResponseType.OK:
             label = chooser.get_filename()
-            if self._main_list_box_row.is_visible:
-                self._main_list_box_row.set_visible(False)
             folder = FolderBox(label)
             folder._folder_box_label.set_label(label)
             self._main_list_box.insert(folder, -1)
-            chooser.destroy() 
+            chooser.destroy()
         else:
             chooser.destroy()
 
@@ -52,3 +52,9 @@ class FolderCleaner(Gtk.ApplicationWindow):
         about = self._about_window
         about.run()
         about.destroy()
+
+    def on_count_change(self, settings, key, button):
+        if self.settings.get_int('count') > 0:
+            self._main_list_box_row.set_visible(False)
+        else:
+            self._main_list_box_row.set_visible(True)
