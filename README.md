@@ -1,1 +1,1 @@
-Simple programm for sorting files in selected folder, or remove them. Or for simple deleting screenshot files in your ~/Pictures folder.
+Simple programm for sorting files in selected folder, or remove them.
