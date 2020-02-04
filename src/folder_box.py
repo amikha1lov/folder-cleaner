@@ -43,20 +43,22 @@ class FolderBox(Gtk.ListBox):
     @Gtk.Template.Callback()
     def on__sort_button_clicked(self, button):
         GExiv2.initialize()
-        #find better solution
         folders, files = get_files_and_folders(self.label)
         for f in files:
             try:
                 photo = GExiv2.Metadata.new()
                 photo.open_path(f)
-                tag = photo.get_tag_string('Exif.Image.DateTime')
-                filedate = tag[:10].replace(':', '')
-                correct_path = self.label + filedate
-                if os.path.isdir(correct_path):
-                    GLib.spawn_async(['/usr/bin/mv', f, correct_path])
+                if photo.has_tag('Exif.Image.DateTime'):
+                    tag = photo.get_tag_string('Exif.Image.DateTime')
+                    filedate = tag[:10].replace(':', '')
+                    correct_path = self.label + filedate
+                    if os.path.isdir(correct_path):
+                        GLib.spawn_async(['/usr/bin/mv', f, correct_path])
+                    else:
+                        GLib.spawn_async(['/usr/bin/mkdir', '-p', correct_path])
+                        GLib.spawn_async(['/usr/bin/mv', f, correct_path])
                 else:
-                    GLib.spawn_async(['/usr/bin/mkdir', '-p', correct_path])
-                    GLib.spawn_async(['/usr/bin/mv', f, correct_path])
+                    print('cannot read Date in: ', f)
             except:
                 #TODO add GLib.Error handler
                 print('cannot read EXIF in: ', f)
