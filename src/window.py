@@ -19,6 +19,7 @@ from gi.repository import Gtk, Gio
 
 from folder_box import FolderBox
 from preferences import PreferencesWindow
+from constants import folder_cleaner_constants as constants
 
 @Gtk.Template.from_file('/home/late/Programs/folder-cleaner/src/folder-cleaner.ui')
 class FolderCleaner(Gtk.ApplicationWindow):
@@ -34,7 +35,7 @@ class FolderCleaner(Gtk.ApplicationWindow):
         super().__init__(*args, title="Folder Cleaner", application=app)
 
         self.set_wmclass("Folder Cleaner", "Folder Cleaner")
-        self.settings = Gio.Settings.new('com.github.Latesil.folder-cleaner')
+        self.settings = Gio.Settings.new(constants['main_settings_path'])
         self.settings.connect("changed::count", self.on_count_change, None)
 
 

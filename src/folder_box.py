@@ -16,9 +16,11 @@
 import os, shutil
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio, GLib
+gi.require_version('GExiv2', '0.10')
+from gi.repository import Gtk, Gio, GLib, GExiv2
 
 from helpers import get_files_and_folders
+from constants import folder_cleaner_constants as constants
 
 @Gtk.Template.from_file('/home/late/Programs/folder-cleaner/src/folder-box.ui')
 class FolderBox(Gtk.ListBox):
@@ -34,24 +36,30 @@ class FolderBox(Gtk.ListBox):
 
         self.label = label + '/'
         
-        self.settings = Gio.Settings.new('com.github.Latesil.folder-cleaner')
+        self.settings = Gio.Settings.new(constants['main_settings_path'])
         FolderBox.i += 1
         self.settings.set_int('count', FolderBox.i)
 
     @Gtk.Template.Callback()
     def on__sort_button_clicked(self, button):
+        GExiv2.initialize()
         #find better solution
-        for (dirpath, dirnames, filenames) in os.walk(self.label):
-            for f in filenames:
-                filedate = f[4:12]
+        folders, files = get_files_and_folders(self.label)
+        for f in files:
+            try:
+                photo = GExiv2.Metadata.new()
+                photo.open_path(f)
+                tag = photo.get_tag_string('Exif.Image.DateTime')
+                filedate = tag[:10].replace(':', '')
                 correct_path = self.label + filedate
-                abs_filename = self.label + f
                 if os.path.isdir(correct_path):
-                    shutil.move(abs_filename, correct_path)
+                    GLib.spawn_async(['/usr/bin/mv', f, correct_path])
                 else:
-                    os.mkdir(correct_path)
-                    shutil.move(abs_filename, correct_path)
-            break
+                    GLib.spawn_async(['/usr/bin/mkdir', '-p', correct_path])
+                    GLib.spawn_async(['/usr/bin/mv', f, correct_path])
+            except:
+                #TODO add GLib.Error handler
+                print('cannot read EXIF in: ', f)
 
 
     @Gtk.Template.Callback()
