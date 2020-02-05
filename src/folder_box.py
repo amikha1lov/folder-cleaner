@@ -72,16 +72,20 @@ class FolderBox(Gtk.ListBox):
 
     @Gtk.Template.Callback()
     def on__sort_files_clicked(self, button):
-        folders, files = get_files_and_folders(self.label)
+        folders, files = get_files_and_folders(self.label, absolute_folders_paths=False)
         for f in files:
-            filename, file_extension = os.path.splitext(f)
-            ext = file_extension[1:]
+            simple_file = Gio.File.new_for_path(f)
+            name, ext = simple_file.get_basename().split('.')
+
+            destination_folder = Gio.File.new_for_path(self.label + '/' + ext)
+            destination_for_files = Gio.File.new_for_path(destination_folder.get_path() + '/' + simple_file.get_basename())
+
             if ext not in folders:
-                GLib.spawn_async(['/usr/bin/mkdir', '-p', self.label + ext])
-                GLib.spawn_async(['/usr/bin/mv', f,  self.label + ext])
-                folders.append(self.label + ext)
+                Gio.File.make_directory(destination_folder)
+                simple_file.move(destination_for_files, Gio.FileCopyFlags.NONE)
+                folders.append(ext)
             else:
-                GLib.spawn_async(['/usr/bin/mv', f,  self.label + ext])
+                simple_file.move(destination_for_files, Gio.FileCopyFlags.NONE)
 
 
     @Gtk.Template.Callback()

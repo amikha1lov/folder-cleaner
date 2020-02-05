@@ -1,7 +1,7 @@
 import gi
 from gi.repository import Gio
 
-def get_files_and_folders(folder):
+def get_files_and_folders(folder, absolute_folders_paths=True):
         folder_list = []
         files_list = []
 
@@ -10,8 +10,11 @@ def get_files_and_folders(folder):
         info = enumerator.next_file()
         while info is not None:
             if info.get_file_type() == Gio.FileType.DIRECTORY:
-                abs_path = path.get_path() + '/' + info.get_name()
-                folder_list.append(abs_path)
+                if absolute_folders_paths:
+                    folder_path = path.get_path() + '/' + info.get_name()
+                else:
+                    folder_path = info.get_name()
+                folder_list.append(folder_path)
                 info = enumerator.next_file()
             else:
                 abs_path = path.get_path() + '/' + info.get_name()
