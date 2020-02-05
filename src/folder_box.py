@@ -13,12 +13,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import dbus.service
 import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('GExiv2', '0.10')
 gi.require_version('Notify', '0.7')
-from gi.repository import Gtk, Gio, GLib, GExiv2, Notify
+from gi.repository import Gtk, Gio, GLib, Notify, GExiv2
 
 from helpers import get_files_and_folders
 from constants import folder_cleaner_constants as constants
