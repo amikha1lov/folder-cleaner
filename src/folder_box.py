@@ -64,9 +64,8 @@ class FolderBox(Gtk.ListBox):
                         photo_file.move(destination_for_photo, Gio.FileCopyFlags.NONE)
                 else:
                     print('cannot read data in:', f)
-            except:
-                #TODO add GLib.Error handler
-                print('cannot read EXIF in', f)
+            except GLib.Error as err:
+                print('%s: %s in file: %s, (code: %s)' % (err.domain, err.message, f, err.code))
 
 
     @Gtk.Template.Callback()
