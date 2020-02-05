@@ -13,10 +13,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import dbus.service
 import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('GExiv2', '0.10')
-from gi.repository import Gtk, Gio, GLib, GExiv2
+gi.require_version('Notify', '0.7')
+from gi.repository import Gtk, Gio, GLib, GExiv2, Notify
 
 from helpers import get_files_and_folders
 from constants import folder_cleaner_constants as constants
@@ -34,6 +36,8 @@ class FolderBox(Gtk.ListBox):
         super().__init__(**kwargs)
 
         self.label = label + '/'
+
+        Notify.init('com.github.Latesil.folder-cleaner')
         
         self.settings = Gio.Settings.new(constants['main_settings_path'])
         FolderBox.i += 1
@@ -66,6 +70,9 @@ class FolderBox(Gtk.ListBox):
                     print('cannot read data in:', f)
             except GLib.Error as err:
                 print('%s: %s in file: %s, (code: %s)' % (err.domain, err.message, f, err.code))
+        
+        notification = Notify.Notification.new('Folder Cleaner', "All photos successfully sorted")
+        notification.show()
 
 
     @Gtk.Template.Callback()
@@ -84,6 +91,9 @@ class FolderBox(Gtk.ListBox):
                 folders.append(ext)
             else:
                 simple_file.move(destination_for_files, Gio.FileCopyFlags.NONE)
+
+        notification = Notify.Notification.new('Folder Cleaner', "All files successfully sorted")
+        notification.show()
 
 
     @Gtk.Template.Callback()
