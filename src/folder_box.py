@@ -48,20 +48,26 @@ class FolderBox(Gtk.ListBox):
             try:
                 photo = GExiv2.Metadata.new()
                 photo.open_path(f)
-                if photo.has_tag('Exif.Image.DateTime'):
+                if photo.has_exif() and photo.has_tag('Exif.Image.DateTime'):
                     tag = photo.get_tag_string('Exif.Image.DateTime')
                     filedate = tag[:10].replace(':', '')
-                    correct_path = self.label + filedate
-                    if os.path.isdir(correct_path):
-                        GLib.spawn_async(['/usr/bin/mv', f, correct_path])
+                    folder_for_photo = self.label + filedate
+
+                    #Gio.Files
+                    photo_file = Gio.File.new_for_path(f)
+                    destination_folder = Gio.File.new_for_path(folder_for_photo)
+                    destination_for_photo = Gio.File.new_for_path(folder_for_photo + '/' + photo_file.get_basename())
+
+                    if GLib.file_test(folder_for_photo, GLib.FileTest.IS_DIR):
+                        photo_file.move(destination_for_photo, Gio.FileCopyFlags.NONE)
                     else:
-                        GLib.spawn_async(['/usr/bin/mkdir', '-p', correct_path])
-                        GLib.spawn_async(['/usr/bin/mv', f, correct_path])
+                        Gio.File.make_directory(destination_folder)
+                        photo_file.move(destination_for_photo, Gio.FileCopyFlags.NONE)
                 else:
-                    print('cannot read Date in: ', f)
+                    print('cannot read data in:', f)
             except:
                 #TODO add GLib.Error handler
-                print('cannot read EXIF in: ', f)
+                print('cannot read EXIF in', f)
 
 
     @Gtk.Template.Callback()
