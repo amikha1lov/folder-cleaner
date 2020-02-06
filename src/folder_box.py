@@ -79,7 +79,7 @@ class FolderBox(Gtk.ListBox):
         folders, files = get_files_and_folders(self.label, absolute_folders_paths=False)
         for f in files:
             simple_file = Gio.File.new_for_path(f)
-            name, ext = simple_file.get_basename().split('.')
+            name, ext = simple_file.get_basename().rsplit('.', 1)
 
             destination_folder = Gio.File.new_for_path(self.label + '/' + ext)
             destination_for_files = Gio.File.new_for_path(destination_folder.get_path() + '/' + simple_file.get_basename())
