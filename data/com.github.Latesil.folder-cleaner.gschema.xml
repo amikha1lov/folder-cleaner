@@ -6,5 +6,10 @@
       <summary>Count active folders</summary>
       <description>How many folders in app.</description>
     </key>
+    <key type="b" name="is-sorted">
+      <default>false</default>
+      <summary>Is files sorted</summary>
+      <description>Only for internal usage.</description>
+    </key>
   </schema>
 </schemalist>

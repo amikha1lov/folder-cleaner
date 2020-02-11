@@ -19,7 +19,7 @@ gi.require_version('GExiv2', '0.10')
 gi.require_version('Notify', '0.7')
 from gi.repository import Gtk, Gio, GLib, Notify, GExiv2
 
-from helpers import get_files_and_folders
+from helpers import get_files_and_folders, operations
 from constants import folder_cleaner_constants as constants
 
 @Gtk.Template.from_file('/home/late/Programs/folder-cleaner/src/folder-box.ui')
@@ -82,16 +82,20 @@ class FolderBox(Gtk.ListBox):
             name, ext = simple_file.get_basename().rsplit('.', 1)
 
             destination_folder = Gio.File.new_for_path(self.label + '/' + ext)
-            destination_for_files = Gio.File.new_for_path(destination_folder.get_path() + '/' + simple_file.get_basename())
+            destination_path = destination_folder.get_path() + '/' + simple_file.get_basename()
+            destination_for_files = Gio.File.new_for_path(destination_path)
 
             if ext not in folders:
                 Gio.File.make_directory(destination_folder)
                 simple_file.move(destination_for_files, Gio.FileCopyFlags.NONE)
                 folders.append(ext)
+                operations[f] = destination_path
             else:
                 simple_file.move(destination_for_files, Gio.FileCopyFlags.NONE)
+                operations[f] = destination_path
 
         notification = Notify.Notification.new('Folder Cleaner', "All files successfully sorted")
+        self.settings.set_boolean('is-sorted', True)
         notification.show()
 
 

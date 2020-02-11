@@ -20,6 +20,7 @@ from gi.repository import Gtk, Gio
 from folder_box import FolderBox
 from preferences import PreferencesWindow
 from constants import folder_cleaner_constants as constants
+from helpers import operations
 
 @Gtk.Template.from_file('/home/late/Programs/folder-cleaner/src/folder-cleaner.ui')
 class FolderCleaner(Gtk.ApplicationWindow):
@@ -37,6 +38,7 @@ class FolderCleaner(Gtk.ApplicationWindow):
         self.set_wmclass("Folder Cleaner", "Folder Cleaner")
         self.settings = Gio.Settings.new(constants['main_settings_path'])
         self.settings.connect("changed::count", self.on_count_change, None)
+        self.settings.connect("changed::is-sorted", self.on_is_sorted_change, None)
 
 
     @Gtk.Template.Callback()
@@ -74,3 +76,6 @@ class FolderCleaner(Gtk.ApplicationWindow):
             self._main_list_box_row.set_visible(False)
         else:
             self._main_list_box_row.set_visible(True)
+
+    def on_is_sorted_change(self, settings, key, button):
+        print(operations)

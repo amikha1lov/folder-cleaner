@@ -22,3 +22,5 @@ def get_files_and_folders(folder, absolute_folders_paths=True):
                 info = enumerator.next_file()
          
         return folder_list, files_list
+
+operations = {}
