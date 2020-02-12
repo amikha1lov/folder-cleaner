@@ -13,14 +13,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import time
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio
+from gi.repository import Gtk, Gio, GLib
 
 from folder_box import FolderBox
 from preferences import PreferencesWindow
 from constants import folder_cleaner_constants as constants
-from helpers import operations
+from helpers import operations, folders_made
 
 @Gtk.Template.from_file('/home/late/Programs/folder-cleaner/src/folder-cleaner.ui')
 class FolderCleaner(Gtk.ApplicationWindow):
@@ -31,6 +32,7 @@ class FolderCleaner(Gtk.ApplicationWindow):
     _add_label = Gtk.Template.Child()
     _main_list_box_row = Gtk.Template.Child()
     _main_list_box = Gtk.Template.Child()
+    _main_revealer = Gtk.Template.Child()
 
     def __init__(self, app, *args, **kwargs):
         super().__init__(*args, title="Folder Cleaner", application=app)
@@ -71,6 +73,25 @@ class FolderCleaner(Gtk.ApplicationWindow):
         about.run()
         about.destroy()
 
+    @Gtk.Template.Callback()
+    def on__main_revealer_button_clicked(self, button):
+        for key, value in operations.items():
+            from_file = Gio.File.new_for_path(value)
+            to_file = Gio.File.new_for_path(key)
+            from_file.move(to_file, Gio.FileCopyFlags.NONE)
+        
+        operations.clear()
+
+        for folder in folders_made:
+            GLib.spawn_async(['/usr/bin/rm', '-r', folder])
+
+        folders_made.clear()
+
+    @Gtk.Template.Callback()
+    def on__revealer_close_button_clicked(self, button):
+        self.settings.set_boolean('is-sorted', False)
+        operations = {}
+
     def on_count_change(self, settings, key, button):
         if self.settings.get_int('count') > 0:
             self._main_list_box_row.set_visible(False)
@@ -78,4 +99,7 @@ class FolderCleaner(Gtk.ApplicationWindow):
             self._main_list_box_row.set_visible(True)
 
     def on_is_sorted_change(self, settings, key, button):
-        print(operations)
+        if self.settings.get_boolean('is-sorted'):
+            self._main_revealer.set_reveal_child(True)
+        else:
+            self._main_revealer.set_reveal_child(False)

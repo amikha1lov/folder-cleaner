@@ -19,7 +19,7 @@ gi.require_version('GExiv2', '0.10')
 gi.require_version('Notify', '0.7')
 from gi.repository import Gtk, Gio, GLib, Notify, GExiv2
 
-from helpers import get_files_and_folders, operations
+from helpers import get_files_and_folders, operations, folders_made
 from constants import folder_cleaner_constants as constants
 
 @Gtk.Template.from_file('/home/late/Programs/folder-cleaner/src/folder-box.ui')
@@ -87,6 +87,7 @@ class FolderBox(Gtk.ListBox):
 
             if ext not in folders:
                 Gio.File.make_directory(destination_folder)
+                folders_made.append(self.label + ext)
                 simple_file.move(destination_for_files, Gio.FileCopyFlags.NONE)
                 folders.append(ext)
                 operations[f] = destination_path

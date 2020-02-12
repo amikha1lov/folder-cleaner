@@ -24,3 +24,4 @@ def get_files_and_folders(folder, absolute_folders_paths=True):
         return folder_list, files_list
 
 operations = {}
+folders_made = []
