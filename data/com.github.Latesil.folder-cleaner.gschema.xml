@@ -11,5 +11,10 @@
       <summary>Is files sorted</summary>
       <description>Only for internal usage.</description>
     </key>
+    <key type="b" name="sort-by-category">
+      <default>false</default>
+      <summary>File sort by category</summary>
+      <description>Determines if files should be sorted by category instead by extension.</description>
+    </key>
   </schema>
 </schemalist>

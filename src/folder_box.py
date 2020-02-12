@@ -95,9 +95,7 @@ class FolderBox(Gtk.ListBox):
                 simple_file.move(destination_for_files, Gio.FileCopyFlags.NONE)
                 operations[f] = destination_path
 
-        notification = Notify.Notification.new('Folder Cleaner', "All files successfully sorted")
         self.settings.set_boolean('is-sorted', True)
-        notification.show()
 
 
     @Gtk.Template.Callback()

@@ -63,7 +63,6 @@ class FolderCleaner(Gtk.ApplicationWindow):
     @Gtk.Template.Callback()
     def on__preferences_button_clicked(self, button):
         preferences = PreferencesWindow(self)
-        preferences.set_transient_for(self)
         preferences.run()
         preferences.destroy()
 
