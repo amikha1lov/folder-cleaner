@@ -78,16 +78,20 @@ class FolderBox(Gtk.ListBox):
     def on__sort_files_clicked(self, button):
         folders, files = get_files_and_folders(self.label, absolute_folders_paths=False)
         for f in files:
+            content_type, val = Gio.content_type_guess(f)
             simple_file = Gio.File.new_for_path(f)
             name, ext = simple_file.get_basename().rsplit('.', 1)
 
-            destination_folder = Gio.File.new_for_path(self.label + '/' + ext)
+            if self.settings.get_boolean('sort-by-category'):
+                destination_folder = Gio.File.new_for_path(self.label + '/' + content_type.split('/')[0].capitalize())
+            else:
+                destination_folder = Gio.File.new_for_path(self.label + '/' + ext)
             destination_path = destination_folder.get_path() + '/' + simple_file.get_basename()
             destination_for_files = Gio.File.new_for_path(destination_path)
 
             if ext not in folders:
                 Gio.File.make_directory(destination_folder)
-                folders_made.append(self.label + ext)
+                folders_made.append(destination_folder.get_path())
                 simple_file.move(destination_for_files, Gio.FileCopyFlags.NONE)
                 folders.append(ext)
                 operations[f] = destination_path

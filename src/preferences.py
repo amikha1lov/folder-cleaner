@@ -29,6 +29,8 @@ class PreferencesWindow(Gtk.Dialog):
         super().__init__(**kwargs)
     
         self.settings = Gio.Settings.new(constants['main_settings_path'])
+        self.sorted_by_category = self.settings.get_boolean('sort-by-category')
+        self._category_checkbox.set_active(self.sorted_by_category)
 
     @Gtk.Template.Callback()
     def on__category_checkbox_toggled(self, button):
