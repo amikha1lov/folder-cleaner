@@ -16,5 +16,10 @@
       <summary>File sort by category</summary>
       <description>Determines if files should be sorted by category instead by extension.</description>
     </key>
+    <key name="saved-folders" type="as">
+			<default>[]</default>
+			<summary>Saved folders list</summary>
+			<description>A list of the folders which are saved.</description>
+		</key>
   </schema>
 </schemalist>

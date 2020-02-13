@@ -19,7 +19,7 @@ gi.require_version('GExiv2', '0.10')
 gi.require_version('Notify', '0.7')
 from gi.repository import Gtk, Gio, GLib, Notify, GExiv2
 
-from helpers import get_files_and_folders, operations, folders_made
+from helpers import get_files_and_folders, operations, folders_made, labels
 from constants import folder_cleaner_constants as constants
 
 @Gtk.Template.from_file('/home/late/Programs/folder-cleaner/src/folder-box.ui')
@@ -35,6 +35,9 @@ class FolderBox(Gtk.ListBox):
         super().__init__(**kwargs)
 
         self.label = label + '/'
+
+        #TODO
+        labels.append(self.label[:-1])
 
         Notify.init('com.github.Latesil.folder-cleaner')
         
@@ -110,5 +113,9 @@ class FolderBox(Gtk.ListBox):
     @Gtk.Template.Callback()
     def on__close_folder_clicked(self, button):
         FolderBox.i -= 1
+
+        #TODO
+        labels.remove(self.label[:-1])
+        
         self.settings.set_int('count', FolderBox.i)
         self.destroy()

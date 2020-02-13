@@ -20,7 +20,7 @@ from gi.repository import Gtk, Gio, GLib
 from folder_box import FolderBox
 from preferences import PreferencesWindow
 from constants import folder_cleaner_constants as constants
-from helpers import operations, folders_made
+from helpers import operations, folders_made, labels
 
 @Gtk.Template.from_file('/home/late/Programs/folder-cleaner/src/folder-cleaner.ui')
 class FolderCleaner(Gtk.ApplicationWindow):
@@ -32,7 +32,6 @@ class FolderCleaner(Gtk.ApplicationWindow):
     _main_list_box_row = Gtk.Template.Child()
     _main_list_box = Gtk.Template.Child()
     _main_revealer = Gtk.Template.Child()
-    _save_button = Gtk.Template.Child()
 
     def __init__(self, app, *args, **kwargs):
         super().__init__(*args, title="Folder Cleaner", application=app)
@@ -41,6 +40,13 @@ class FolderCleaner(Gtk.ApplicationWindow):
         self.settings = Gio.Settings.new(constants['main_settings_path'])
         self.settings.connect("changed::count", self.on_count_change, None)
         self.settings.connect("changed::is-sorted", self.on_is_sorted_change, None)
+        self.saved_folders = self.settings.get_value('saved-folders')
+
+        if len(self.saved_folders) > 0:
+            for path in self.saved_folders:
+                folder = FolderBox(path)
+                folder._folder_box_label.set_label(path)
+                self._main_list_box.insert(folder, -1)
 
 
     @Gtk.Template.Callback()
@@ -92,16 +98,16 @@ class FolderCleaner(Gtk.ApplicationWindow):
         operations = {}
 
     @Gtk.Template.Callback()
-    def on__save_button_clicked(self, button):
-        print('on__save_button_clicked')
+    def on__main_window_destroy(self, w):
+        self.settings.set_value('saved-folders', GLib.Variant('as', labels))
+        
 
     def on_count_change(self, settings, key, button):
         if self.settings.get_int('count') > 0:
             self._main_list_box_row.set_visible(False)
-            self._save_button.set_visible(True)
         else:
             self._main_list_box_row.set_visible(True)
-            self._save_button.set_visible(False)
+            self.settings.reset('saved-folders')
 
     def on_is_sorted_change(self, settings, key, button):
         if self.settings.get_boolean('is-sorted'):

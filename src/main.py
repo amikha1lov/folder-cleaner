@@ -43,8 +43,5 @@ class Application(Gtk.Application):
 
         self.window.present()
 
-    def on_quit(self, action, param):
-        self.quit()
-
 if __name__ == "__main__":
     main()

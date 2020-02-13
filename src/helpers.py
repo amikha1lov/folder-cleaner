@@ -25,3 +25,4 @@ def get_files_and_folders(folder, absolute_folders_paths=True):
 
 operations = {}
 folders_made = []
+labels = []
