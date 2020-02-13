@@ -122,6 +122,7 @@
             <child>
               <object class="GtkButton" id="_save_button">
                 <property name="label" translatable="yes">Save</property>
+                <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <signal name="clicked" handler="on__save_button_clicked" swapped="no"/>

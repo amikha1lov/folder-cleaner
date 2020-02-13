@@ -32,6 +32,7 @@ class FolderCleaner(Gtk.ApplicationWindow):
     _main_list_box_row = Gtk.Template.Child()
     _main_list_box = Gtk.Template.Child()
     _main_revealer = Gtk.Template.Child()
+    _save_button = Gtk.Template.Child()
 
     def __init__(self, app, *args, **kwargs):
         super().__init__(*args, title="Folder Cleaner", application=app)
@@ -90,11 +91,17 @@ class FolderCleaner(Gtk.ApplicationWindow):
         self.settings.set_boolean('is-sorted', False)
         operations = {}
 
+    @Gtk.Template.Callback()
+    def on__save_button_clicked(self, button):
+        print('on__save_button_clicked')
+
     def on_count_change(self, settings, key, button):
         if self.settings.get_int('count') > 0:
             self._main_list_box_row.set_visible(False)
+            self._save_button.set_visible(True)
         else:
             self._main_list_box_row.set_visible(True)
+            self._save_button.set_visible(False)
 
     def on_is_sorted_change(self, settings, key, button):
         if self.settings.get_boolean('is-sorted'):

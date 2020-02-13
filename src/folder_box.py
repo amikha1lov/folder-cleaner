@@ -70,7 +70,7 @@ class FolderBox(Gtk.ListBox):
             except GLib.Error as err:
                 print('%s: %s in file: %s, (code: %s)' % (err.domain, err.message, f, err.code))
         
-        notification = Notify.Notification.new('Folder Cleaner', "All photos successfully sorted")
+        notification = Notify.Notification.new('Folder Cleaner', "All photos were successfully sorted")
         notification.show()
 
 
