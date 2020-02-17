@@ -43,5 +43,3 @@ class Application(Gtk.Application):
 
         self.window.present()
 
-if __name__ == "__main__":
-    main()
