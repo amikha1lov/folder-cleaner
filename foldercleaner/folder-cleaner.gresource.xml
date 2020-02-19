@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/github/Latesil/folder-cleaner">
+    <file>folder_box.ui</file>
+    <file>preferences.ui</file>
+    <file>folder_cleaner.ui</file>
+  </gresource>
+</gresources>
