@@ -19,7 +19,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gio
 from locale import gettext as _
-from window import FolderCleaner
+from .window import FolderCleaner
 
 #locales
 locale.textdomain('com.github.Latesil.folder-cleaner')

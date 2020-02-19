@@ -20,10 +20,10 @@ gi.require_version('GExiv2', '0.10')
 gi.require_version('Notify', '0.7')
 from gi.repository import Gtk, Gio, GLib, Notify, GExiv2
 
-from helpers import get_files_and_folders, operations, folders_made, labels
-from constants import folder_cleaner_constants as constants
+from .helpers import get_files_and_folders, operations, folders_made, labels
+from .constants import folder_cleaner_constants as constants
 
-@Gtk.Template(resource_path = constants['UI_PATH'] + 'src/folder-box.ui')
+@Gtk.Template(resource_path = constants['UI_PATH'] + 'folder-box.ui')
 class FolderBox(Gtk.ListBox):
 
     __gtype_name__ = "_list_box"

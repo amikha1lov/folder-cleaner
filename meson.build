@@ -9,8 +9,8 @@ appname = 'com.github.Latesil.folder-cleaner'
 i18n  = import('i18n')
 
 subdir('data')
+subdir('foldercleaner')
 subdir('po')
 # subdir('nautilus-script')
-subdir('foldercleaner')
 
 meson.add_install_script('build-aux/meson/postinstall.py')

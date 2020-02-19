@@ -16,9 +16,9 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio
-from constants import folder_cleaner_constants as constants
+from .constants import folder_cleaner_constants as constants
 
-@Gtk.Template.from_file('/home/late/Programs/folder-cleaner/src/preferences.ui')
+@Gtk.Template(resource_path = constants['UI_PATH'] + 'preferences.ui')
 class PreferencesWindow(Gtk.Dialog):
 
     __gtype_name__ = "_preferences_dialog"

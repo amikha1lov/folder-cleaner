@@ -18,12 +18,12 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio, GLib
 
-from folder_box import FolderBox
-from preferences import PreferencesWindow
-from constants import folder_cleaner_constants as constants
-from helpers import operations, folders_made, labels
+from .folder_box import FolderBox
+from .preferences import PreferencesWindow
+from .constants import folder_cleaner_constants as constants
+from .helpers import operations, folders_made, labels
 
-@Gtk.Template(resource_path = constants['UI_PATH'] + 'src/folder-cleaner.ui')
+@Gtk.Template(resource_path = constants['UI_PATH'] + 'folder-cleaner.ui')
 class FolderCleaner(Gtk.ApplicationWindow):
 
     __gtype_name__ = "_main_window"
