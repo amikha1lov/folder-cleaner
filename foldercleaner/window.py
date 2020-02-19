@@ -23,7 +23,7 @@ from .preferences import PreferencesWindow
 from .constants import folder_cleaner_constants as constants
 from .helpers import operations, folders_made, labels
 
-@Gtk.Template(resource_path = constants['UI_PATH'] + 'folder-cleaner.ui')
+@Gtk.Template(resource_path = constants['UI_PATH'] + 'folder_cleaner.ui')
 class FolderCleaner(Gtk.ApplicationWindow):
 
     __gtype_name__ = "_main_window"
