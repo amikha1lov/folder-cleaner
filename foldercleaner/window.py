@@ -76,6 +76,7 @@ class FolderCleaner(Gtk.ApplicationWindow):
     @Gtk.Template.Callback()
     def on__about_button_clicked(self, button):
         about = self._about_window
+        about.set_logo_icon_name(constants["APP_ID"])
         about.run()
         about.destroy()
 
