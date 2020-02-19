@@ -13,6 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from locale import gettext as _
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio, GLib
@@ -34,9 +35,9 @@ class FolderCleaner(Gtk.ApplicationWindow):
     _main_revealer = Gtk.Template.Child()
 
     def __init__(self, app, *args, **kwargs):
-        super().__init__(*args, title="Folder Cleaner", application=app)
+        super().__init__(*args, title=_("Folder Cleaner"), application=app)
 
-        self.set_wmclass("Folder Cleaner", "Folder Cleaner")
+        self.set_wmclass("Folder Cleaner", _("Folder Cleaner"))
         self.settings = Gio.Settings.new(constants['main_settings_path'])
         self.settings.connect("changed::count", self.on_count_change, None)
         self.settings.connect("changed::is-sorted", self.on_is_sorted_change, None)
@@ -51,11 +52,11 @@ class FolderCleaner(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on__add_button_clicked(self, button):
-        chooser = Gtk.FileChooserDialog(title="Open Folder",
+        chooser = Gtk.FileChooserDialog(title=_("Open Folder"),
                                         transient_for=self,
                                         action=Gtk.FileChooserAction.SELECT_FOLDER,
-                                        buttons=("Cancel", Gtk.ResponseType.CANCEL,
-                                                 "OK", Gtk.ResponseType.OK))
+                                        buttons=(_("Cancel"), Gtk.ResponseType.CANCEL,
+                                                 _("OK"), Gtk.ResponseType.OK))
         response = chooser.run()
         if response == Gtk.ResponseType.OK:
             label = chooser.get_filename()

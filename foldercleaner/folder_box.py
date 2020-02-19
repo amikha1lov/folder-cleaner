@@ -13,6 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from locale import gettext as _
 import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('GExiv2', '0.10')
@@ -73,7 +74,7 @@ class FolderBox(Gtk.ListBox):
             except GLib.Error as err:
                 print('%s: %s in file: %s, (code: %s)' % (err.domain, err.message, f, err.code))
         
-        notification = Notify.Notification.new('Folder Cleaner', "All photos were successfully sorted")
+        notification = Notify.Notification.new(_('Folder Cleaner'), _("All photos were successfully sorted"))
         notification.show()
 
 

@@ -15,6 +15,7 @@
 
 import sys
 import gi
+from locale import gettext as _
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gio
 from window import FolderCleaner
@@ -31,7 +32,7 @@ class Application(Gtk.Application):
 
         self.window = None
 
-        GLib.set_application_name('Folder Cleaner')
+        GLib.set_application_name(_('Folder Cleaner'))
         GLib.set_prgname("com.github.Latesil.folder-cleaner")
 
     def do_startup(self):
