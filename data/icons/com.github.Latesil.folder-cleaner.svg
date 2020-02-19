@@ -13,7 +13,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.0beta2 (unknown)"
-   sodipodi:docname="folder-cleaner.svg">
+   sodipodi:docname="folder-cleaner.svg"
+   inkscape:export-filename="/home/late/Pictures/inkscape/folder-cleaner-512.png"
+   inkscape:export-xdpi="1639.9207"
+   inkscape:export-ydpi="1639.9207">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -24,7 +27,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="13.090168"
-     inkscape:cx="23.435079"
+     inkscape:cx="22.671147"
      inkscape:cy="19.198069"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -83,10 +86,10 @@
        height="4.7259121"
        width="7.937499"
        id="rect839"
-       style="fill:#ffccaa;stroke-width:0.0169585"
+       style="fill:#ff7f2a;stroke-width:0.0169585;fill-opacity:1"
        rx="0" />
     <rect
-       style="fill:#e3dedb;stroke-width:0.0184472"
+       style="fill:#f2f2f2;stroke-width:0.0184472"
        id="rect867"
        width="7.0747857"
        height="1.4755265"
@@ -94,7 +97,7 @@
        y="7.3204432"
        ry="0.59081614" />
     <rect
-       style="fill:#ffccaa;stroke-width:0.0180946"
+       style="fill:#ff7f2a;stroke-width:0.0180946"
        id="rect841"
        width="7.937499"
        height="1.8764977"
@@ -103,7 +106,7 @@
        ry="0" />
     <path
        id="rect877"
-       style="fill:#e6e6e6;stroke-width:0.0144641;fill-opacity:1"
+       style="fill:#ffffff;stroke-width:0.0144641;fill-opacity:1"
        d="m 14.04977,8.5009475 -2.681041,2.6463295 -1.283333,-1.3479857 -0.3519513,0.3559427 1.6157393,1.697151 0.35195,-0.355943 -0.0041,-0.0045 2.685143,-2.650395 z"
        inkscape:connector-curvature="0" />
   </g>
