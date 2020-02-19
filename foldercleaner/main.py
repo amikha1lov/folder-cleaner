@@ -13,12 +13,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import locale
 import sys
 import gi
-from locale import gettext as _
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gio
+from locale import gettext as _
 from window import FolderCleaner
+
+#locales
+locale.textdomain('com.github.Latesil.folder-cleaner')
 
 def main():
 	app = Application()
