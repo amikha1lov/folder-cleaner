@@ -18,7 +18,7 @@ msgstr "Активные директории"
 
 #: data/com.github.Latesil.folder-cleaner.gschema.xml:7
 msgid "How many folders in app."
-msgstr "Сколько папок в приложении"
+msgstr "Сколько папок в приложении."
 
 #: data/com.github.Latesil.folder-cleaner.gschema.xml:11
 msgid "Is files sorted"
@@ -26,7 +26,7 @@ msgstr "Файлы отсортированы"
 
 #: data/com.github.Latesil.folder-cleaner.gschema.xml:12
 msgid "Only for internal usage."
-msgstr "Только для внутреннего использования"
+msgstr "Только для внутреннего использования."
 
 #: data/com.github.Latesil.folder-cleaner.gschema.xml:16
 msgid "File sort by category"
@@ -34,7 +34,7 @@ msgstr "Сортировка файлов по категориям"
 
 #: data/com.github.Latesil.folder-cleaner.gschema.xml:17
 msgid "Determines if files should be sorted by category instead by extension."
-msgstr "Сортировка файлов по категориям, вместо сортировки по расширениям"
+msgstr "Сортировка файлов по категориям, вместо сортировки по расширениям."
 
 #: data/com.github.Latesil.folder-cleaner.gschema.xml:21
 msgid "Saved folders list"
@@ -42,7 +42,7 @@ msgstr "Список сохраненных директорий"
 
 #: data/com.github.Latesil.folder-cleaner.gschema.xml:22
 msgid "A list of the folders which are saved."
-msgstr "Список директорий которые сохранены"
+msgstr "Список директорий которые сохранены."
 
 #: foldercleaner/folder_box.py:77 foldercleaner/folder_cleaner.ui:101
 #: foldercleaner/main.py:39 foldercleaner/window.py:38
@@ -82,10 +82,6 @@ msgstr "Сортировать файлы"
 msgid "Sort files in folder"
 msgstr "Сортировать файлы в папке"
 
-#: foldercleaner/folder_cleaner.ui:10
-msgid "Copyright (c)"
-msgstr "Копирайт (c)"
-
 #: foldercleaner/folder_cleaner.ui:11
 msgid "Program for folder management."
 msgstr "Программа для управления папками."
@@ -100,7 +96,7 @@ msgstr "Настройки"
 
 #: foldercleaner/folder_cleaner.ui:79
 msgid "About"
-msgstr "About"
+msgstr "О приложении"
 
 #: foldercleaner/folder_cleaner.ui:184
 msgid "Click \"Add\" for adding your folders here"
@@ -108,7 +104,7 @@ msgstr "Нажмите \"Добавить\" чтобы добавить папк
 
 #: foldercleaner/folder_cleaner.ui:222
 msgid "Files were sorted."
-msgstr "Файлы были отсортированы"
+msgstr "Файлы были отсортированы."
 
 #: foldercleaner/folder_cleaner.ui:232
 msgid "Undo"

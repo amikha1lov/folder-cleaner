@@ -82,10 +82,6 @@ msgstr ""
 msgid "Sort files in folder"
 msgstr ""
 
-#: foldercleaner/folder_cleaner.ui:10
-msgid "Copyright (c)"
-msgstr ""
-
 #: foldercleaner/folder_cleaner.ui:11
 msgid "Program for folder management."
 msgstr ""
