@@ -1,0 +1,135 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Language: ru\n"
+
+#: data/com.github.Latesil.folder-cleaner.gschema.xml:6
+msgid "Count active folders"
+msgstr "Активные директории"
+
+#: data/com.github.Latesil.folder-cleaner.gschema.xml:7
+msgid "How many folders in app."
+msgstr "Сколько папок в приложении"
+
+#: data/com.github.Latesil.folder-cleaner.gschema.xml:11
+msgid "Is files sorted"
+msgstr "Файлы отсортированы"
+
+#: data/com.github.Latesil.folder-cleaner.gschema.xml:12
+msgid "Only for internal usage."
+msgstr "Только для внутреннего использования"
+
+#: data/com.github.Latesil.folder-cleaner.gschema.xml:16
+msgid "File sort by category"
+msgstr "Сортировка файлов по категориям"
+
+#: data/com.github.Latesil.folder-cleaner.gschema.xml:17
+msgid "Determines if files should be sorted by category instead by extension."
+msgstr "Сортировка файлов по категориям, вместо сортировки по расширениям"
+
+#: data/com.github.Latesil.folder-cleaner.gschema.xml:21
+msgid "Saved folders list"
+msgstr "Список сохраненных директорий"
+
+#: data/com.github.Latesil.folder-cleaner.gschema.xml:22
+msgid "A list of the folders which are saved."
+msgstr "Список директорий которые сохранены"
+
+#: foldercleaner/folder_box.py:77 foldercleaner/folder_cleaner.ui:101
+#: foldercleaner/main.py:39 foldercleaner/window.py:38
+#: foldercleaner/window.py:40
+msgid "Folder Cleaner"
+msgstr "Сортировщик папок"
+
+#: foldercleaner/folder_box.py:77
+msgid "All photos were successfully sorted"
+msgstr "Все фото были успешно отсортированы"
+
+#: foldercleaner/folder_box.ui:26
+msgid "Folder name"
+msgstr "Имя директории"
+
+#: foldercleaner/folder_box.ui:49
+msgid "Open that folder"
+msgstr "Открыть эту папку"
+
+#: foldercleaner/folder_box.ui:68
+msgid "Delete"
+msgstr "Удалить"
+
+#: foldercleaner/folder_box.ui:104
+msgid "Sort Photos"
+msgstr "Сортировать фото"
+
+#: foldercleaner/folder_box.ui:108
+msgid "Sort photos in folder"
+msgstr "Сортировать фото в папке"
+
+#: foldercleaner/folder_box.ui:119
+msgid "Sort Files"
+msgstr "Сортировать файлы"
+
+#: foldercleaner/folder_box.ui:123
+msgid "Sort files in folder"
+msgstr "Сортировать файлы в папке"
+
+#: foldercleaner/folder_cleaner.ui:10
+msgid "Copyright (c)"
+msgstr "Копирайт (c)"
+
+#: foldercleaner/folder_cleaner.ui:11
+msgid "Program for folder management."
+msgstr "Программа для управления папками."
+
+#: foldercleaner/folder_cleaner.ui:13
+msgid "Github"
+msgstr "Github"
+
+#: foldercleaner/folder_cleaner.ui:65
+msgid "Preferences"
+msgstr "Настройки"
+
+#: foldercleaner/folder_cleaner.ui:79
+msgid "About"
+msgstr "About"
+
+#: foldercleaner/folder_cleaner.ui:184
+msgid "Click \"Add\" for adding your folders here"
+msgstr "Нажмите \"Добавить\" чтобы добавить папку сюда"
+
+#: foldercleaner/folder_cleaner.ui:222
+msgid "Files were sorted."
+msgstr "Файлы были отсортированы"
+
+#: foldercleaner/folder_cleaner.ui:232
+msgid "Undo"
+msgstr "Назад"
+
+#: foldercleaner/preferences.ui:50
+msgid "File sort"
+msgstr "Сортировка файлов"
+
+#: foldercleaner/preferences.ui:67
+msgid "Sort files by category"
+msgstr "Сортировать файлы по категориям"
+
+#: foldercleaner/window.py:55
+msgid "Open Folder"
+msgstr "Открыть"
+
+#: foldercleaner/window.py:58
+msgid "Cancel"
+msgstr "Отмена"
+
+#: foldercleaner/window.py:59
+msgid "OK"
+msgstr "OK"
