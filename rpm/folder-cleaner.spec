@@ -1,7 +1,7 @@
 %global uuid    com.github.Latesil.%{name}
 
 Name:           folder-cleaner
-Version:        1.0.0
+Version:        1.0.1
 Release:        1%{?dist}
 Summary:        Simple programm for sorting files in selected folder, or remove them
 
@@ -54,5 +54,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 
 %changelog
+* Thu Feb 20 2020 Latesil <vihilantes@gmail.com> - 1.0.1-1
+- Update to 1.0.1
+
 * Thu Feb 20 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 1.0.0-1
 - Initial package
