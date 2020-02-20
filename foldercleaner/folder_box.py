@@ -88,6 +88,7 @@ class FolderBox(Gtk.ListBox):
 
             if self.settings.get_boolean('sort-by-category'):
                 destination_folder = Gio.File.new_for_path(self.label + '/' + content_type.split('/')[0].capitalize())
+                ext = content_type.split('/')[0].capitalize()
             else:
                 destination_folder = Gio.File.new_for_path(self.label + '/' + ext)
             destination_path = destination_folder.get_path() + '/' + simple_file.get_basename()
