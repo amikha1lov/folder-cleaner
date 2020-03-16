@@ -120,4 +120,4 @@ class FolderBox(Gtk.ListBox):
         labels.remove(self.label[:-1])
         
         self.settings.set_int('count', FolderBox.i)
-        self.destroy()
+        self.get_parent().destroy()

@@ -40,5 +40,4 @@ if compile_schemas.found()
   )
 endif
 
-message('Making a list of icons')
 subdir('icons')
