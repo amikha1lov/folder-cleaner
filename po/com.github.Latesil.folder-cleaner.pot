@@ -114,8 +114,12 @@ msgstr ""
 msgid "File sort"
 msgstr ""
 
-#: foldercleaner/preferences.ui:67
-msgid "Sort files by category"
+#: foldercleaner/preferences.ui:70
+msgid "By Extension"
+msgstr ""
+
+#: foldercleaner/preferences.ui:71
+msgid "By Type"
 msgstr ""
 
 #: foldercleaner/window.py:55
