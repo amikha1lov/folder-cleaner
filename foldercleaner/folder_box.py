@@ -93,7 +93,7 @@ class FolderBox(Gtk.ListBox):
 
             if self.settings.get_boolean('sort-by-category'):
                 if content_type in ARCHIVES:
-                    content_type_modified = 'Archives'
+                    content_type_modified = _('Archives')
                 else:
                     content_type_modified = content_type.split('/')[0].capitalize()
                 destination_folder = Gio.File.new_for_path(self.label + '/' + content_type_modified)

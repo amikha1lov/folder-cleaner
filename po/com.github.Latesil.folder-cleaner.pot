@@ -54,6 +54,10 @@ msgstr ""
 msgid "All photos were successfully sorted"
 msgstr ""
 
+#: foldercleaner/folder_box.py:96
+msgid "Archives"
+msgstr ""
+
 #: foldercleaner/folder_box.ui:26
 msgid "Folder name"
 msgstr ""
@@ -133,3 +137,4 @@ msgstr ""
 #: foldercleaner/window.py:59
 msgid "OK"
 msgstr ""
+
