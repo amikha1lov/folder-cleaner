@@ -23,6 +23,11 @@ from gi.repository import Gtk, Gio, GLib, Notify, GExiv2
 from .helpers import get_files_and_folders, operations, folders_made, labels
 from .constants import folder_cleaner_constants as constants
 
+ARCHIVES = ['application/x-tar', 'application/zip', 'application/gzip',
+            'application/x-bzip2', 'application/x-xz', 'application/x-7z-compressed',
+            'application/vnd.ms-cab-compressed', 'application/java-archive',
+            'application/x-rar-compressed', 'application/x-gtar']
+
 @Gtk.Template(resource_path = constants['UI_PATH'] + 'folder_box.ui')
 class FolderBox(Gtk.ListBox):
 
@@ -87,7 +92,11 @@ class FolderBox(Gtk.ListBox):
             name, ext = simple_file.get_basename().rsplit('.', 1)
 
             if self.settings.get_boolean('sort-by-category'):
-                destination_folder = Gio.File.new_for_path(self.label + '/' + content_type.split('/')[0].capitalize())
+                if content_type in ARCHIVES:
+                    content_type_modified = 'Archives'
+                else:
+                    content_type_modified = content_type.split('/')[0].capitalize()
+                destination_folder = Gio.File.new_for_path(self.label + '/' + content_type_modified)
                 ext = content_type.split('/')[0].capitalize()
             else:
                 destination_folder = Gio.File.new_for_path(self.label + '/' + ext)
