@@ -23,18 +23,22 @@ class PreferencesWindow(Gtk.Dialog):
 
     __gtype_name__ = "_preferences_dialog"
 
-    _category_checkbox = Gtk.Template.Child()
+
+    sorting_combobox = Gtk.Template.Child()
 
     def __init__(self, app, *args, **kwargs):
         super().__init__(**kwargs)
     
         self.settings = Gio.Settings.new(constants['main_settings_path'])
         self.sorted_by_category = self.settings.get_boolean('sort-by-category')
-        self._category_checkbox.set_active(self.sorted_by_category)
+        if self.sorted_by_category:
+            self.sorting_combobox.props.active = 1
+        else:
+            self.sorting_combobox.props.active = 0
 
     @Gtk.Template.Callback()
-    def on__category_checkbox_toggled(self, button):
-        if button.get_active():
-            self.settings.set_boolean('sort-by-category', True)
+    def on_sorting_combobox_changed(self, box):
+        if box.props.active == 0: #by extension
+            self.settings.set_boolean('sort-by-category', False) #by type
         else:
-            self.settings.set_boolean('sort-by-category', False)
+            self.settings.set_boolean('sort-by-category', True)
