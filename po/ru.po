@@ -114,9 +114,13 @@ msgstr "Назад"
 msgid "File sort"
 msgstr "Сортировка файлов"
 
-#: foldercleaner/preferences.ui:67
-msgid "Sort files by category"
-msgstr "Сортировать файлы по категориям"
+#: foldercleaner/preferences.ui:70
+msgid "By Extension"
+msgstr "По расширению"
+
+#: foldercleaner/preferences.ui:71
+msgid "By Type"
+msgstr "По категории"
 
 #: foldercleaner/window.py:55
 msgid "Open Folder"
